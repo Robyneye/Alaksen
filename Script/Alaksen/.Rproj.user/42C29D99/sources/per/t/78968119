@@ -3,9 +3,9 @@
     "path": "C:/Users/User/Desktop/Github/CompSites/Scripts/vegcalcs_2021.R",
     "project_path": null,
     "type": "r_source",
-    "hash": "0",
+    "hash": "2134611053",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1630357312349.0,
     "source_on_save": false,
     "relative_order": 3,
@@ -19,7 +19,7 @@
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1630357411820,
+    "last_content_update": 1628270005,
     "read_only": false,
     "read_only_alternatives": []
 }

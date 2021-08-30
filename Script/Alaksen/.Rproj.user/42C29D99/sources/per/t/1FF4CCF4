@@ -3,23 +3,23 @@
     "path": "C:/Users/User/Desktop/Github/Alaksen/Script/Alaksen/Alaksen2021calcs.R",
     "project_path": "Alaksen2021calcs.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "2725138728",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1630352885313.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "51,20",
-        "scrollLine": "43"
+        "cursorPosition": "68,0",
+        "scrollLine": "47"
     },
     "folds": "",
-    "lastKnownWriteTime": 1630357055,
+    "lastKnownWriteTime": 1630358513,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1630357342005,
+    "last_content_update": 1630358513065,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -9,11 +9,11 @@ library(BiodiversityR)
 veg <- read.csv("C://Users/User/Desktop/Github/Alaksen/FieldData/TyphaAugust2021.csv", fileEncoding = "UTF-8-BOM") 
 
 veg$COVER_CLASS <- as.numeric(veg$COVER_CLASS) # ensure numeric cover data
-veg <- subset(veg, TREATMENT == 1) # select only treatment 1
+veg <- subset(veg, TREATMENT == 3) # select only treatment 3
 veg <- subset(veg, SPECIES_CODE != "MUD" & SPECIES_CODE != "WOOD" & SPECIES_CODE != "ROCK" & SPECIES_CODE != "LITTER" & SPECIES_CODE != "LOG")
 
 # transform data for richness calculations
-veg.wide <- subset(veg, select = c(-Comments, -TREATMENT, -POST_LDEPTH_CM, -LITTER_DEPTH_CM, -FLOWERS, -MAX_TYPHA_HEIGHT_CM, -RAMETS_LIVING)) %>%
+veg.wide <- subset(veg, select = c(-Comments, -TREATMENT, -POST_LDEPTH_CM, -LITTER_DEPTH_CM, -FLOWERS, -MAX_TYPHA_HEIGHT_CM, -RAMETS_LIVING, -ORIGIN)) %>%
   spread(SPECIES_CODE, COVER_CLASS) # long to wide format
 veg.wide[is.na(veg.wide)] <- 0 # empty cells are zero
 veg.wide <- veg.wide[-1] # remove plot id column
@@ -49,6 +49,10 @@ typhaLitter <- mean(veg$LITTER_DEPTH_CM, na.rm=TRUE)
 richness <- (specnumber(veg.wide))
 richness.nat <- specnumber(veg.wide.nat)
 
+# relative abundance
+natives <- mean(rowSums(veg.wide.nat)/rowSums(veg.wide))
+invasives <- mean(rowSums(veg.wide.inv)/rowSums(veg.wide))
+exotics <- mean(rowSums(veg.wide.exo)/rowSums(veg.wide))
 
 
 # RESULTS (modify filepath)
@@ -60,6 +64,6 @@ result <- data.frame(typhaHeight,
                      mean(typhaFlowers),
                      mean(typhaLitter))
 
-write.csv(result, "C://Users/User/Desktop/Github/Alaksen/Results/Treatment_A/Alaksen2021-Aresults.csv") # veg analysis results
+write.csv(result, "C://Users/User/Desktop/Github/Alaksen/Results/Treatment_C/Alaksen2021-Cresults.csv") # veg analysis results
 
-write.csv(species, "C://Users/User/Desktop/Github/Alaksen/Results/Treatment_A/Alaksen2021-Aspecies.csv") # unique species lists
+write.csv(species, "C://Users/User/Desktop/Github/Alaksen/Results/Treatment_C/Alaksen2021-Cspecies.csv") # unique species lists

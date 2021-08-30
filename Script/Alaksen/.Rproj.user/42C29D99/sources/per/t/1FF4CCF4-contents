@@ -13,7 +13,7 @@ veg <- subset(veg, TREATMENT == 1) # select only treatment 1
 veg <- subset(veg, SPECIES_CODE != "MUD" & SPECIES_CODE != "WOOD" & SPECIES_CODE != "ROCK" & SPECIES_CODE != "LITTER" & SPECIES_CODE != "LOG")
 
 # transform data for richness calculations
-veg.wide <- subset(veg, select = c(-Comments, -TREATMENT, -POST_LDEPTH_CM, -LITTER_DEPTH_CM, -FLOWERS, -MAX_TYPHA_HEIGHT_CM, -RAMETS_LIVING)) %>%
+veg.wide <- subset(veg, select = c(-Comments, -TREATMENT, -POST_LDEPTH_CM, -LITTER_DEPTH_CM, -FLOWERS, -MAX_TYPHA_HEIGHT_CM, -RAMETS_LIVING, -ORIGIN)) %>%
   spread(SPECIES_CODE, COVER_CLASS) # long to wide format
 veg.wide[is.na(veg.wide)] <- 0 # empty cells are zero
 veg.wide <- veg.wide[-1] # remove plot id column
