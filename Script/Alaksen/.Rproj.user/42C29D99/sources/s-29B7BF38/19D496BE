@@ -12,14 +12,14 @@
     "properties": {
         "expression": "veg.wide",
         "caption": "veg.wide",
-        "totalObservations": 31,
-        "displayedObservations": 31,
-        "variables": 14,
-        "cacheKey": "292FFAC4",
+        "totalObservations": "14",
+        "displayedObservations": "14",
+        "variables": "28",
+        "cacheKey": "FE549854",
         "object": "veg.wide",
         "environment": "",
-        "contentUrl": "grid_resource/gridviewer.html?env=&obj=veg.wide&cache_key=292FFAC4&max_cols=50",
-        "preview": 0
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=veg.wide&cache_key=FE549854&max_cols=50",
+        "preview": "0"
     },
     "folds": "",
     "lastKnownWriteTime": 8522328256558293352,
