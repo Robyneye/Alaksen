@@ -1,0 +1,65 @@
+# August 30, 2021
+
+# libraries
+library(tidyverse)
+library(BiodiversityR)
+
+# Data import and prep
+# import (select your file path by uncommenting the correct line)
+veg <- read.csv("C://Users/User/Desktop/Github/Alaksen/FieldData/TyphaAugust2021.csv", fileEncoding = "UTF-8-BOM") 
+
+veg$COVER_CLASS <- as.numeric(veg$COVER_CLASS) # ensure numeric cover data
+veg <- subset(veg, TREATMENT == 1) # select only treatment 1
+veg <- subset(veg, SPECIES_CODE != "MUD" & SPECIES_CODE != "WOOD" & SPECIES_CODE != "ROCK" & SPECIES_CODE != "LITTER" & SPECIES_CODE != "LOG")
+
+# transform data for richness calculations
+veg.wide <- subset(veg, select = c(-Comments, -TREATMENT, -POST_LDEPTH_CM, -LITTER_DEPTH_CM, -FLOWERS, -MAX_TYPHA_HEIGHT_CM, -RAMETS_LIVING)) %>%
+  spread(SPECIES_CODE, COVER_CLASS) # long to wide format
+veg.wide[is.na(veg.wide)] <- 0 # empty cells are zero
+veg.wide <- veg.wide[-1] # remove plot id column
+
+# generate species lists
+species <- unique(veg$SPECIES_CODE) # unique species list
+
+species.nat <- subset(veg$SPECIES_CODE, veg$ORIGIN == "N") %>% # unique native species
+  unique()
+species.inv <- subset(veg$SPECIES_CODE, veg$ORIGIN == "I") %>% # unique invasive species
+  unique()
+
+# native and invasive subsets
+veg.wide.nat <- veg.wide %>% select(any_of(species.nat)) # select only native species
+veg.wide.inv <- veg.wide %>% select(any_of(species.inv)) # select only invasive species
+veg.wide.exo <- veg.wide %>% select(-any_of(species.nat)) # select any non-native species
+
+# CALCULATIONS
+
+# mean height of tallest Typha
+typhaHeight <- mean(veg$MAX_TYPHA_HEIGHT_CM, na.rm=TRUE)
+
+# mean stem count
+typhaStems <- mean(veg$RAMETS_LIVING, na.rm=TRUE)
+
+# mean number of flower spikes
+typhaFlowers <- mean(veg$FLOWERS, na.rm=TRUE)
+
+# mean litter depth
+typhaLitter <- mean(veg$LITTER_DEPTH_CM, na.rm=TRUE)
+
+# richness (native and total)
+richness <- (specnumber(veg.wide))
+richness.nat <- specnumber(veg.wide.nat)
+
+
+
+# RESULTS (modify filepath)
+
+result <- data.frame(typhaHeight,
+                     mean(richness),
+                     mean(richness.nat),
+                     mean(typhaStems),
+                     mean(typhaFlowers),
+                     mean(typhaLitter))
+
+write.csv(result, "C://Users/User/Desktop/Github/Alaksen/Results/Treatment_A/Alaksen2021-Aresults.csv") # veg analysis results
+
+write.csv(species, "C://Users/User/Desktop/Github/Alaksen/Results/Treatment_A/Alaksen2021-Aspecies.csv") # unique species lists
